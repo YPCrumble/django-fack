@@ -3,10 +3,10 @@ from __future__ import absolute_import
 try:
     from django.conf.urls.defaults import *
 except:
-    from django.conf.urls import url, patterns
+    from django.conf.urls import url
 from . import views
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(regex = r'^$',
         view  = views.TopicList.as_view(),
         name  = 'faq_topic_list',
@@ -27,4 +27,4 @@ urlpatterns = patterns('',
         view  = views.QuestionDetail.as_view(),
         name  = 'faq_question_detail',
     ),
-)
+]

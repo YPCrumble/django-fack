@@ -2,7 +2,7 @@
 Test support harness to make setup.py test work.
 """
 
-import sys
+import sys, os
 
 import django
 from django.conf import settings
@@ -25,6 +25,26 @@ settings.configure(
         'django.contrib.messages.middleware.MessageMiddleware',
     ],
     ROOT_URLCONF = 'fack.urls',
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                os.path.normpath(os.path.join(os.path.dirname(__file__), 'templates')),
+            ],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.contrib.auth.context_processors.auth',
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.media',
+                    'django.template.context_processors.static',
+                    'django.template.context_processors.tz',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
 )
 if hasattr(django, 'setup'):
     django.setup()

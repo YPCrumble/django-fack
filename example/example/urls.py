@@ -1,9 +1,10 @@
-from django.conf.urls.defaults import patterns, url, include
+from django.conf.urls import url, include
 from django.contrib import admin; admin.autodiscover()
 from django.conf import settings
 from django.views.generic import TemplateView
+from django.views.static import serve
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Just a simple example "home" page to show a bit of help/info.
     url(r'^$', TemplateView.as_view(template_name="home.html")),
     
@@ -15,7 +16,7 @@ urlpatterns = patterns('',
 
     # Normally we'd do this if DEBUG only, but this is just an example app.
     url(regex  = r'^static/(?P<path>.*)$', 
-        view   = 'django.views.static.serve',
+        view   = serve,
         kwargs = {'document_root': settings.MEDIA_ROOT}
     ),
-)
+]

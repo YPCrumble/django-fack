@@ -10,15 +10,7 @@ from ..models import Topic, Question
 class FAQViewTests(django.test.TestCase):
     urls = 'fack.urls'
     fixtures = ['faq_test_data.json']
-
-    def setUp(self):
-        # Make some test templates available.
-        self._oldtd = settings.TEMPLATE_DIRS
-        settings.TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__), 'templates')]
-
-    def tearDown(self):
-        settings.TEMPLATE_DIRS = self._oldtd
-    
+   
     def test_submit_faq_get(self):
         response = self.client.get('/submit/')
         self.assertEqual(response.status_code, 200)
